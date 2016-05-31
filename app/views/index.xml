@@ -1,0 +1,50 @@
+<Alloy>
+	<Window class="container">
+	    <View id='display_container' class="view_row_container">
+	        <Label id='lbl_display'></Label>
+	    </View>
+	    <View id="row_1_container" class="view_row_container">
+    	        <View class='view_num_left' onClick="numPress">
+            		    <Label id="lbl_m">M</Label>
+            	</View>
+            	<View class='view_num' onClick="numPress">
+                    <Label id="lbl_d">D</Label>
+            </View>
+            <View class='view_operator' onClick="deleteLeft">
+                    <Label id="lbl_delete"></Label>
+            </View>
+        </View>
+        <View id="row_2_container" class="view_row_container">
+                <View class='view_num_left' onClick="numPress">
+                    <Label id="lbl_c">C</Label>
+                </View>
+                <View class='view_num' onClick="numPress">
+                    <Label id="lbl_l">L</Label>
+                </View>
+                <View class='view_operator' onClick="clearDisplay">
+                    <Label id="lbl_clear">clr</Label>
+                </View>
+
+        </View>
+        <View id="row_3_container" class="view_row_container">
+                <View class='view_num_left' onClick="numPress">
+                    <Label id="lbl_x">X</Label>
+                </View>
+                <View class='view_num' onClick="numPress">
+                    <Label id="lbl_v">V</Label>
+                </View>
+                <View class='view_operator' onClick="addPress">
+                    <Label id="lbl_plus">+</Label>
+                </View>
+        </View>
+        <View id="row_4_container" class="view_row_container">
+                <View class='view_num_left' onClick="numPress">
+                    <Label id="lbl_l">I</Label>
+                </View>
+                <View class='view_operator_dbl' onClick="totalPress">
+                    <Label id="lbl_equals">=</Label>
+                </View>
+
+        </View>
+	</Window>
+</Alloy>
