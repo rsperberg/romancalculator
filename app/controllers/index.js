@@ -1,23 +1,16 @@
 // set up the accumulators
 var m_accum, d_accum, c_accum, l_accum, x_accum, v_accum, i_accum;
-var active_key = {
-    m : true,
-    d : true,
-    c : true,
-    l : true,
-    x : true,
-    v : true,
-    i : true,
+
+var key_state = {
+    m :  { active: true, opacity: 1.0, label: '$.lbl_m' },
+    d : { active: true, opacity: 1.0, label: '$.lbl_d' },
+    c : { active: true, opacity: 1.0, label: '$.lbl_c' },
+    l : { active: true, opacity: 1.0, label: '$.lbl_l' },
+    x : { active: true, opacity: 1.0, label: '$.lbl_x' },
+    v : { active: true, opacity: 1.0, label: '$.lbl_v' },
+    i :{ active: true, opacity: 1.0, label: '$.lbl_i' },
 };
-var key_opacity = {
-    m : 1.0,
-    d : 1.0,
-    c : 1.0,
-    l : 1.0,
-    x : 1.0,
-    v : 1.0,
-    i : 1.0,
-};
+
 var roman_array = ['m', 'd', 'c', 'l', 'x', 'v', 'i'];
 var last_char = '',
     prev_char = '',
@@ -84,12 +77,12 @@ function dimChars(last, prev) {
     }
 }
 function setActive(element, index, array) {
-    active_key.element = true;
-    key_opacity.element = 1.0;
+    key_state.element.active = true;
+    key_state.element.opacity = 1.0;
 }
 function setInactive(element, index, array) {
-    active_key.element = false;
-    key_opacity.element = 0.6;
+    key_state.element.active = false;
+    key_state.element.opacity = 0.6;
 }
-$.lbl_m.addEventListener(pressNum($.))
+$.lbl_m.addEventListener(pressNum);
 $.index.open();
