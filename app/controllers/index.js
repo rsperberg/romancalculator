@@ -12,20 +12,22 @@ var key_state = {
 };
 
 var roman_array = ['m', 'd', 'c', 'l', 'x', 'v', 'i'];
-var last_char = '',
-    prev_char = '',
-    last_2_chars = '';
+var last-0_char = '',
+    last-1_char = '',
+    last-2_char = '',
+    last_3_chars = '';
 
 $.lbl_display.text = '';
 
 function lastPressed(char_entered) {
-    // keep track of last two characters entered
-    prev_char = last_char;
-    last_char = char_entered;
+    // keep track of last three characters entered
+    last-2_char = last-1_char;
+    last-1_char = last-0_char;
+    last-0_char = char_entered;
     // combine these to faciltate switch in dimChars()
-    last_2_chars = prev_char + last_char;
+    last_3_chars = last-2_char + last-1_char +  last-0_char;
     // chain to function that enables/disables number keys
-    dimChars(prev_char, last_char);
+    dimChars(last-2_char, last-1_char, last-0_char);
 }
 function numPress(e) {
 //    Ti.API.info('e info is: '+JSON.stringify(e));
@@ -48,23 +50,24 @@ function clearDisplay() {
     // set the display to empty string
     $.lbl_display.text = '';
     // reset the characters pressed variables to empty string
-    prev_char = '';
-    last_char = '';
-    last_2_chars = '';
-    dimChars(null);
+    last-0_char = '',
+    last-1_char = '',
+    last-2_char = '',
+    last_3_chars = '';    dimChars(null);
 }
 function deleteLeft() {
     // use slice method to remove last character of display
     var displayText =  $.lbl_display.text;
     var charCount = displayText.length;
-    $.lbl_display.text = displayText.slice(0, -1);
+    (charCount > 0) ? $.lbl_display.text = displayText.slice(0, -1) : ;
     // reset the characters pressed variables to earlier characters
     // this allows backspace to be pressed several times without throwing off logic
-    last_char = displayText.charAt(charCount-2);
-    prev_char = displayText.charAt(charCount-3);
+    last-0_char = displayText.charAt(charCount-2);
+    last-1_char = displayText.charAt(charCount-3);
+    last-2_char = displayText.charAt(charCount-4);
     last_2_chars = prev_char + last_char;
 }
-function dimChars(last, prev) {
+function dimChars(last-2, last-1, last-0) {
     if (last == null) {
         roman_array.forEach(setActive);
     } else {
