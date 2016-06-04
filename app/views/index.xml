@@ -4,10 +4,10 @@
 	        <Label id='lbl_display'></Label>
 	    </View>
 	    <View id="row_1_container" class="view_row_container">
-    	        <View class='view_num_left' onClick="numPress">
+    	        <View class='view_num_left'>
             		    <Label id="lbl_m">M</Label>
             	</View>
-            	<View class='view_num' onClick="numPress">
+            	<View class='view_num'>
                     <Label id="lbl_d">D</Label>
             </View>
             <View class='view_operator' onClick="deleteLeft">
@@ -15,10 +15,10 @@
             </View>
         </View>
         <View id="row_2_container" class="view_row_container">
-                <View class='view_num_left' onClick="numPress">
+                <View class='view_num_left'>
                     <Label id="lbl_c">C</Label>
                 </View>
-                <View class='view_num' onClick="numPress">
+                <View class='view_num'>
                     <Label id="lbl_l">L</Label>
                 </View>
                 <View class='view_operator' onClick="clearDisplay">
@@ -27,19 +27,19 @@
 
         </View>
         <View id="row_3_container" class="view_row_container">
-                <View class='view_num_left' onClick="numPress">
+                <View class='view_num_left'>
                     <Label id="lbl_x">X</Label>
                 </View>
-                <View class='view_num' onClick="numPress">
+                <View class='view_num'>
                     <Label id="lbl_v">V</Label>
                 </View>
-                <View class='view_operator' onClick="addPress">
+                <View class='view_operator'>
                     <Label id="lbl_plus">+</Label>
                 </View>
         </View>
         <View id="row_4_container" class="view_row_container">
-                <View class='view_num_left' onClick="numPress">
-                    <Label id="lbl_l">I</Label>
+                <View class='view_num_left'>
+                    <Label id="lbl_i">I</Label>
                 </View>
                 <View class='view_operator_dbl' onClick="totalPress">
                     <Label id="lbl_equals">=</Label>
