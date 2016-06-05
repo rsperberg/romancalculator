@@ -1,95 +1,111 @@
 ".container": {
-	top						: 0,
+	top				: 0,
 	backgroundColor	: '#f3eba3', // a khaki,
-	layout				  	: 'vertical',
-	height					: Ti.UI.FILL,
+	layout			: 'vertical',
+	height			: Ti.UI.FILL,
 }
 
 "#display_container": {
-	top						: '20dp',
+	top				: '20dp',
 	backgroundColor	: '#000',
 }
 "#display_container[platform=android]": {
-	top						: 0,
+	top				: 0,
 }
 "#lbl_display": {
-	width					: Ti.UI.FILL,
-	right						: '2dp',
+	width			: Ti.UI.FILL,
+	right			: '2dp',
 	backgroundColor	: 'transparent',
-	color						: '#fff',
+	color			: '#fff',
 	font: {
-		fontSize			: 44,
-		fontFamily		: 'AvenirNextCondensed-DemiBold',//'AvenirNextCondensed-Bold',
+		fontSize		: 44,
+		fontFamily	: 'AvenirNextCondensed-DemiBold',//'AvenirNextCondensed-Bold',
 	},
-	textAlign				: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+	textAlign		: Ti.UI.TEXT_ALIGNMENT_RIGHT,
 }
 ".view_row_container": {
-	top						: '10dp',
-	left						: '10dp',
-	right						: '10dp',
-	layout					: 'horizontal',
-	horizontalWrap		: false,
-	height					: Alloy.Globals.button3Height,
-	width					: Ti.UI.FILL,
+	top				: '10dp',
+	left				: '10dp',
+	right			: '10dp',
+	layout			: 'horizontal',
+	horizontalWrap	: false,
+	height			: Alloy.Globals.button3Height,
+	width			: Ti.UI.FILL,
 //	backgroundColor	: "yellow",
 }
 ".view_num_left": {
-	top						: 0,
-	bottom					: 0,
-//	left						: '5dp',
-//	right						: '5dp',
-	width					: Alloy.Globals.button3Width,
-	height					: Alloy.Globals.button3Height,
+	top				: 0,
+	bottom			: 0,
+//	left				: '5dp',
+//	right			: '5dp',
+	width			: Alloy.Globals.button3Width,
+	height			: Alloy.Globals.button3Height,
 	backgroundColor	: '#7682ed',//'#f3eba3', // a khaki
 }
 ".view_num": {
-	top						: 0,
-	bottom					: 0,
-	left						: '10dp',
-//	right						: '5dp',
-	width					: Alloy.Globals.button3Width,
-	height					: Alloy.Globals.button3Height,
+	top				: 0,
+	bottom			: 0,
+	left				: '10dp',
+//	right			: '5dp',
+	width			: Alloy.Globals.button3Width,
+	height			: Alloy.Globals.button3Height,
 	backgroundColor	: '#7682ed',//'#f3eba3', // a khaki,
 }
 ".view_operator": {
-	top						: 0,
-	bottom					: 0,
-	left						: '10dp',
-//	right						: '5dp',
-	width					: Alloy.Globals.button3Width,
-	height					: Alloy.Globals.button3Height,
+	top				: 0,
+	bottom			: 0,
+	left				: '10dp',
+//	right			: '5dp',
+	width			: Alloy.Globals.button3Width,
+	height			: Alloy.Globals.button3Height,
 	backgroundColor	: '#df1d82',
 }
 
 "#lbl_clear": {
 	font: {
-		fontFamily		: 'AvenirNext-DemiBold',
+		fontFamily	: 'AvenirNext-DemiBold',
 	}
 }
 ".view_operator_dbl": {
-	top						: 0,
-	bottom					: 0,
-	left						: '10dp',
-//	right						: '5dp',
-	width					: Alloy.Globals.button3Dbl,
-	height					: Alloy.Globals.button3Height,
+	top				: 0,
+	bottom			: 0,
+	left				: '10dp',
+//	right			: '5dp',
+	width			: Alloy.Globals.button3Dbl,
+	height			: Alloy.Globals.button3Height,
 	backgroundColor	: '#1ddfcb',
 }
 
 
 "Label": {
-	width					: Ti.UI.FILL,
-	height					: Ti.UI.FILL,
-	color						: '#fff',
+	width			: Ti.UI.FILL,
+	height			: Ti.UI.FILL,
+	color			: '#fff',
 	font: {
-		fontSize			: 30,
-		fontFamily		: 'AvenirNext-Heavy',//'Share-Bold',
+		fontSize		: 30,
+		fontFamily	: 'AvenirNext-Heavy',//'Share-Bold',
 	},
 //	backgroundColor	: "#f3eba3", // a khaki
-	verticalAlign			: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
-	textAlign				: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	verticalAlign	: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
+	textAlign		: Ti.UI.TEXT_ALIGNMENT_CENTER,
 }
 
 "#lbl_delete": {
-	text						: '<',
+	text				: '<',
+	font: {
+		fontSize		: 44,
+		fontFamily	: 'AvenirNext-Heavy',
+	},
+}
+"#lbl_plus": {
+	font: {
+		fontSize		: 44,
+		fontFamily	: 'AvenirNext-Heavy',
+	},
+}
+"#lbl_equals": {
+	font: {
+		fontSize		: 44,
+		fontFamily	: 'AvenirNext-Heavy',
+	},
 }
