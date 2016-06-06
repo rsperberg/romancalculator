@@ -10,7 +10,7 @@
 	backgroundColor	: '#000',
 }
 "#display_container[platform=android]": {
-	top				: 0,
+	top				: '4dp',
 }
 "#lbl_display": {
 	width			: Ti.UI.FILL,
@@ -25,7 +25,9 @@
 }
 "#lbl_display[platform=android]": {
 	font: {
-		fontFamily	: 'Share',
+		fontSize		: 38,
+		fontFamily	: 'sans-serif-condensed',//'Roboto Condensed',
+		fontWeight	: 400,
 	},
 }
 ".view_row_container": {
@@ -55,9 +57,10 @@
 }
 ".view_num_left[platform=android]": {
 	width			: '31%',
-	height			: '19%',
+	height			: Ti.UI.FILL,
 	font: {
-		fontFamily	: 'Share-Bold',
+		fontFamily	: 'sans-serif',//'Roboto',
+		fontWeight	: 900,
 	},
 }
 ".view_num": {
@@ -71,9 +74,10 @@
 }
 ".view_num[platform=android]": {
 	width			: '31%',
-	height			: '19%',
+	height			: Ti.UI.FILL,,
 	font: {
-		fontFamily	: 'Share-Bold',
+		fontFamily	: 'sans-serif',//'Roboto',
+		fontWeight	: 900,
 	},
 }
 ".view_operator": {
@@ -87,9 +91,10 @@
 }
 ".view_operator[platform=android]": {
 	width			: '31%',
-	height			: '19%',
+	height			: Ti.UI.FILL,,
 	font: {
-		fontFamily	: 'Share-Bold',
+		fontFamily	: 'sans-serif',//'Roboto',
+		fontWeight	: 900,
 	},
 }
 
@@ -100,7 +105,8 @@
 }
 "#lbl_clear[platform=android]": {
 	font: {
-		fontFamily	: 'Share-Bold',
+		fontFamily	: 'sans-serif',//'Roboto',
+		fontWeight	: 400,
 	},
 }
 ".view_operator_dbl": {
@@ -114,7 +120,7 @@
 }
 ".view_operator_dbl[platform=android]": {
 	width			: '63%',
-	height			: '19%',
+	height			: Ti.UI.FILL,
 }
 
 "Label": {
@@ -131,9 +137,9 @@
 }
 "Label[platform=android]": {
 	font: {
-		fontFamily	: 'Share-Bold',
+		fontFamily	: 'sans-serif',//'Roboto',
+		fontWeight	: 900,
 	},
-	height			: '19%',
 }
 "#lbl_delete": {
 	text				: '<',
@@ -141,6 +147,14 @@
 		fontSize		: 44,
 		fontFamily	: 'AvenirNext-Heavy',
 	},
+}
+"#lbl_delete[platform=android]": {
+	font: {
+		fontSize		: 44,
+		fontFamily	: 'sans-serif',//'Roboto',
+		fontWeight	: 900
+	},
+
 }
 "#lbl_plus": {
 	font: {
