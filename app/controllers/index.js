@@ -37,6 +37,9 @@ function lastPressed(char_entered) {
     accumulate(last1_char, last0_char);
 }
 function numPress(e) {
+    Ti.API.info('Alloy.Globals.displayHeight is: '+Alloy.Globals.displayHeight);
+    Ti.API.info('Alloy.Globals.displayWidth is: '+Alloy.Globals.displayWidth);
+    Ti.API.info('Alloy.Globals.button3Width is: '+Alloy.Globals.button3Width);
     if (totalDisplayed == true) {
         clearDisplay();
         totalDisplayed = false;
