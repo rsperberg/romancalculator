@@ -10,7 +10,7 @@
             	<View class='view_num'>
                     <Label id="lbl_d">D</Label>
             </View>
-            <View class='view_operator' onClick="deleteLeft">
+            <View class='view_operator'>
                     <Label id="lbl_delete"></Label>
             </View>
         </View>
@@ -21,8 +21,8 @@
                 <View class='view_num'>
                     <Label id="lbl_l">L</Label>
                 </View>
-                <View class='view_operator' onClick="clearDisplay">
-                    <Label id="lbl_clear">clr</Label>
+                <View class='view_operator'>
+                    <Label id="lbl_clear">N</Label>
                 </View>
 
         </View>
@@ -41,7 +41,7 @@
                 <View class='view_num_left'>
                     <Label id="lbl_i">I</Label>
                 </View>
-                <View class='view_operator_dbl' onClick="totalPress">
+                <View class='view_operator_dbl'>
                     <Label id="lbl_equals">=</Label>
                 </View>
 

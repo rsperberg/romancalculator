@@ -1,3 +1,5 @@
+// use functions placed in library
+var lib = require("operationslib");
 // set up the accumulators
 var m_accum, d_accum, c_accum, l_accum, x_accum, v_accum, i_accum;
 
@@ -37,11 +39,10 @@ function lastPressed(char_entered) {
     accumulate(last1_char, last0_char);
 }
 function numPress(e) {
-    Ti.API.info('Alloy.Globals.displayHeight is: '+Alloy.Globals.displayHeight);
-    Ti.API.info('Alloy.Globals.displayWidth is: '+Alloy.Globals.displayWidth);
-    Ti.API.info('Alloy.Globals.button3Width is: '+Alloy.Globals.button3Width);
+    // using + as a 'total' key means we have to clear the display when we start a new number
     if (totalDisplayed == true) {
         clearDisplay();
+        resetCurrentNum();
         totalDisplayed = false;
     }
 //    Ti.API.info('e info is: '+JSON.stringify(e));
@@ -118,175 +119,57 @@ function accumulate(last1, last0) {
             }
             break;
         case 'I':
-            Ti.API.info('in accum, last0_char is I');
+//            Ti.API.info('in accum, last0_char is I');
             current_num.I += 'I';
             current_num.arabic += 1;
     }
     Ti.API.info ('current_num is: '+JSON.stringify(current_num));
-    Ti.API.info ('current_num.arabic is: '+current_num.arabic);
+    Ti.API.info ('in accum, current_num.arabic is: '+current_num.arabic);
 }
 /*
  * call when + is pressed
  */
 function addPress(e) {
+    Ti.API.info('--------------------');
+    Ti.API.info('just entered addPress; last0_num is: '+last0_num.arabic);
+    Ti.API.info('last1_num is: '+last1_num.arabic);
+    Ti.API.info('total_num is: '+total_num.arabic);
+    Ti.API.info('--------------------');
+    // Ti.API.info('just entered addPress; last0_num is: '+JSON.stringify(last0_num));
+    // Ti.API.info('last1_num is: '+JSON.stringify(last1_num));
     // keep total in display until a number is pressed
     totalDisplayed = true;
     // put numbers into accumulators
     // if we haven't done any adding yet, last1_num is not yet changed
-    // if (last1_num.arabic == 0) {
-        // last1_num = last0_num;
-    // } else {
-        // // if we've started summing, then use last1_num to hold the everything up to now
-        // last1_num = total_num;
-    // }
-    last1_num = total_num;
+    if (last1_num.arabic == 0 && total_num.arabic == 0) {
+        last1_num = last0_num;
+    } else {
+        // if we've started summing, then use last1_num to hold the everything up to now
+        last1_num = total_num;
+    }
+//    last1_num = total_num;
     // put the number just entered into last0_num
     last0_num = current_num;
-    Ti.API.info('last0_num is: '+JSON.stringify(last0_num));
-    Ti.API.info('last1_num is: '+JSON.stringify(last1_num));
-    // clear out current_num
-    // if (last1_num.arabic == 0) {
-        // // if only one number has been entered, then it's the total already
-        // total_num = last0_num;
-    // } else {
-        // // add the current number to (a) the last number entered or (b) the running total
-        // total_num = add2Numbers(last1_num, last0_num);
-    // }
-    total_num = add2Numbers(last1_num, current_num);
+    Ti.API.info('after testing, last0_num is: '+last0_num.arabic);
+    Ti.API.info('last1_num is: '+last1_num.arabic);
+    // Ti.API.info('last0_num is: '+JSON.stringify(last0_num));
+    // Ti.API.info('last1_num is: '+JSON.stringify(last1_num));
+    total_num = lib.add2Numbers(last1_num, current_num);
+    Ti.API.info('after addition, total_num is: '+total_num.arabic);
+    Ti.API.info('-- total_num is: '+JSON.stringify(total_num));
+    Ti.API.info('before calling resetCurrentNum, it is: '+current_num.arabic);
     resetCurrentNum();
-    displayFromArray();
+    Ti.API.info('after calling resetCurrentNum, it is: '+current_num.arabic);
+    $.lbl_display.text = lib.makeDisplayStringFromArray(total_num);
+    Ti.API.info('just changed display to show total, now done with addPress');
     // remove number from display // will put total on screen, not clear display till number pressed
     //clearDisplay();
 }
-function totalPress(e) {
-    // remove number from display
-    clearDisplay();
-}
-/*
- * adds accumulation of each roman numeral, returns total
- */
-function add2Numbers(prev, last) {
-    // local variable to hold all units
-    var total = { M: '', D: '', C: '', L: '', X: '', V: '', I: '', CM: '', CD: '', XC: '', XL: '', IX: '', IV: '', arabic: 0, MStore: '' };
-    // add up each roman numeral
-    total.M = prev.M + last.M;
-    total.D = prev.D + last.D;
-    total.C = prev.C + last.C;
-    total.L = prev.L + last.L;
-    total.X = prev.X + last.X;
-    total.V = prev.V + last.V;
-    total.I = prev.I + last.I;
-    // add arabic version too
-    total.arabic = prev.arabic + last.arabic;
-
-    // now adjust all accumulators to make them valid numbers
-    // max I from 2 numbers is IIIIII; adjust .I and .V
-    if (total.I == 'IIIIII') { total.I = 'I'; total.V += 'V'; }
-    // if IIIII, move that to .V
-    else if (total.I == 'IIIII') { total.I = ''; total.V += 'V'; }
-    // if IIII, zero out .I and flag .IV (note: if .V == V or VVV, this will convert to IX)
-    else if (total.I == 'IIII') { total.I = ''; total.IV += 'IV'; }
-    // III or less simply remain in total.I
-
-    // max V from 2 numbers is VVV; adjust .V and .X
-    if (total.V == 'VVV') { total.V = 'V'; total.X += 'X';}
-    // if VV, move that to .X
-    else if (total.V == 'VV') { total.V = ''; total.X += 'X';}
-    // leave V and '' alone but account for IX -- a new if clause not an else if
-    if (total.V == 'V' && total.IV != '') { total.V = ''; total.IV = ''; total.IX = 'IX'; }
-
-    // max X from 2 numbers is XXXXXXX; adjust .X and .L if 7
-    if (total.X == 'XXXXXXX') { total.X = 'XX'; total.L += 'L'; }
-    // adjust .X and .L if 6
-    else if (total.X == 'XXXXXX') { total.X = 'X'; total.L += 'L'; }
-    // adjust .X and .L if 5
-    else if (total.X == 'XXXXX') { total.X = ''; total.L += 'L'; }
-    // adjust .X and .XL if 4
-    else if (total.X == 'XXXX') { total.X = ''; total.XL += 'XL'; }
-    // XXX or less simply remain in total.X
-
-    // max L from 2 numbers is LLL; adjust .L and .C
-    if (total.L == 'LLL') { total.L = 'L'; total.C += 'C';}
-    // if LL, move that to .C
-    else if (total.L == 'LL') { total.L = ''; total.C += 'C';}
-    // leave L and '' alone but account for XC -- a new if clause not an else if
-    if (total.L == 'L' && total.XL != '') { total.L = ''; total.XL = ''; total.XC = 'XC'; }
-
-    // max C from 2 numbers is CCCCCCC; adjust .C and .D if 7
-    if (total.C == 'CCCCCCC') { total.C = 'CC'; total.D += 'D'; }
-    // adjust .C and .D if 6
-    else if (total.C == 'CCCCCC') { total.C = 'C'; total.D += 'D'; }
-    // adjust .C and .D if 5
-    else if (total.C == 'CCCCC') { total.C = ''; total.D += 'D'; }
-    // adjust .C and .CD if 4
-    else if (total.C == 'CCCC') { total.C = ''; total.CD += 'CD'; }
-    // CCC or less simply remain in total.C
-
-    // max D from 2 numbers is DDD; adjust .D and .M
-    if (total.D == 'DDD') { total.D = 'D'; total.M += 'M';}
-    // if DD, move that to .C
-    else if (total.D == 'DD') { total.D = ''; total.M += 'M';}
-    // leave D and '' alone but account for CM -- a new if clause not an else if
-    if (total.D == 'D' && total.CD != '') { total.D = ''; total.CD = ''; total.CM = 'CM'; }
-
-    // max M from 2 numbers is MMMMMMMMM; MMMM is largest permissible; store extra M's
-    if (total.M == 'MMMMMMMMM') { total.M = 'MMMM'; total.MStore += '+MMMM+M'; }
-    // adjust .M and .MStore if 8
-    else if (total.M == 'MMMMMMMM') { total.M = 'MMMM'; total.MStore += '+MMMM'; }
-    // adjust .M and .MStore if 7
-    else if (total.M == 'MMMMMMM') { total.M = 'MMMM'; total.MStore += '+MMM'; }
-    // adjust .M and .MStore if 6
-    else if (total.M == 'MMMMMM') { total.M = 'MMMM'; total.MStore += '+MM'; }
-    // adjust .M and .MStore if 5
-    else if (total.M == 'MMMMM') { total.M = 'MMMM'; total.MStore += '+M'; }
-    // no need to adjust .M if 4 or less
-
-    Ti.API.info('total is: '+JSON.stringify(total));
-    var newDisplayTotal = '';
-    newDisplayTotal += total.M;
-    newDisplayTotal += total.CM;
-    newDisplayTotal += total.D;
-    newDisplayTotal += total.CD;
-    newDisplayTotal += total.C;
-    newDisplayTotal += total.XC;
-    newDisplayTotal += total.L;
-    newDisplayTotal += total.XL;
-    newDisplayTotal += total.X;
-    newDisplayTotal += total.IX;
-    newDisplayTotal += total.V;
-    newDisplayTotal += total.IV;
-    newDisplayTotal += total.I;
-
-    $.lbl_display.text = newDisplayTotal;
-    return total;
-}
-
-function displayFromArray() {
-    var newDisplayTotal = '';
-    newDisplayTotal += total_num.M;
-    newDisplayTotal += total_num.CM;
-    newDisplayTotal += total_num.D;
-    newDisplayTotal += total_num.CD;
-    newDisplayTotal += total_num.C;
-    newDisplayTotal += total_num.XC;
-    newDisplayTotal += total_num.L;
-    newDisplayTotal += total_num.XL;
-    newDisplayTotal += total_num.X;
-    newDisplayTotal += total_num.IX;
-    newDisplayTotal += total_num.V;
-    newDisplayTotal += total_num.IV;
-    newDisplayTotal += total_num.I;
-
-//    $.lbl_display.text = newDisplayTotal;
-    $.lbl_display.setText(newDisplayTotal);
-
-}
 
 /*
- * Call this when 'clr' is pressed and when operators are pressed
+ * Call this when N (aka 'clear') is pressed and when operators are pressed
  */
 function clearDisplay() {
-
     // set the display to empty string
     $.lbl_display.text = '';
     // reset the characters pressed variables to empty string
@@ -295,9 +178,10 @@ function clearDisplay() {
     last2_char = '',
     last_3_chars = '';
     dimChars(null);
-    resetCurrentNum();
 }
 function resetCurrentNum() {
+    Ti.API.info('--- entered resetCurrentNum');
+    // set every value to empty string in current_num
     current_num.M = '';
     current_num.CM = '';
     current_num.D = '';
@@ -313,8 +197,30 @@ function resetCurrentNum() {
     current_num.I = '';
     current_num.MStore = '';
     current_num.arabic = 0;
-    Ti.API.info('after reset, current_num is: '+JSON.stringify(current_num));
+    Ti.API.info('--- after resetCurrentNum, current_num is: '+current_num.arabic);
+    // Ti.API.info('after resetCurrentNum, current_num is: '+JSON.stringify(current_num));
     dimChars(null);
+}
+/*
+ * Use this function to clear the display and all values: start over
+ */
+function resetAccumulators() {
+    // set every value to empty string in current_num
+    resetCurrentNum();
+    // set each other accumulator to equal the empty current_num
+    last0_num = current_num;
+    last1_num = current_num;
+    total_num = current_num;
+    Ti.API.info('after reset, last0_num is: '+last0_num.arabic);
+    Ti.API.info('after reset, last1_num is: '+last1_num.arabic);
+    Ti.API.info('after reset, total_num is: '+total_num.arabic);
+    // Ti.API.info('after reset, last0_num is: '+JSON.stringify(last0_num));
+    // Ti.API.info('after reset, last1_num is: '+JSON.stringify(last1_num));
+    // Ti.API.info('after reset, total_num is: '+JSON.stringify(total_num));
+}
+function clearAll() {
+    clearDisplay();
+    resetAccumulators();
 }
 function deleteLeft() {
     // use slice method to remove last character of display
@@ -330,6 +236,7 @@ function deleteLeft() {
     dimChars(last2_char, last1_char, last0_char);
     updateScreen();
 }
+
 function dimChars(last2, last1, last0) {
 //    Ti.API.info('in dimChars, last2, last1 & last0: '+ last2 + last1 + last0);
     if (last0 == null || last0 == '') {
@@ -486,25 +393,11 @@ function setActive(element, index, array) {
     var idx = element;
     key_state[idx].active = true;
     key_state[idx].opacity = 1.0;
-    // Ti.API.info('in setActive, idx is: '+idx);
-    // Ti.API.info('in setActive, key_state[idx] is: '+JSON.stringify(key_state[idx]));
-    // Ti.API.info('in setActive, key_state[idx].active is: '+JSON.stringify(key_state[idx].active));
 }
 function setInactive(element, index, array) {
     var idx = element;
     key_state[idx].active = false;
     key_state[idx].opacity = 0.3;
-    // Ti.API.info('in setInactive, idx is: '+idx);
-    // Ti.API.info('in setInactive, key_state[idx] is: '+JSON.stringify(key_state[idx]));
-    // Ti.API.info('in setInactive, key_state[idx].active is: '+JSON.stringify(key_state[idx].active));
-    // Ti.API.info('in setInactive, key_state[idx].opacity is: '+JSON.stringify(key_state[idx].opacity));
-    // Ti.API.info('in setInactive, key_state[idx].id is: '+JSON.stringify(key_state[idx].id));
-    // var thisLabel = key_state[idx].id;
-    // Ti.API.info('thisLabel is: '+thisLabel);
-// //    thisLabel.setOpacity(0.7);
-    // key_state[idx].id.opacity = 0.7;
-    // thisLabel.setTouchEnabled(false);
-// //    Ti.API.info('$.lbl_m touch is: '+ touchOK);
 }
 function updateScreen() {
     $.lbl_m.opacity = key_state["M"].opacity;
@@ -529,5 +422,8 @@ $.lbl_l.addEventListener('click', numPress);
 $.lbl_x.addEventListener('click', numPress);
 $.lbl_v.addEventListener('click', numPress);
 $.lbl_i.addEventListener('click', numPress);
-$.lbl_plus.addEventListener('click',addPress);
+$.lbl_clear.addEventListener('click', clearAll);
+$.lbl_delete.addEventListener('click', deleteLeft);
+$.lbl_plus.addEventListener('click', addPress);
+$.lbl_equals.addEventListener('click', addPress);
 $.index.open();

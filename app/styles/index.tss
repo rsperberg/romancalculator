@@ -26,8 +26,8 @@
 "#lbl_display[platform=android]": {
 	font: {
 		fontSize		: 38,
-		fontFamily	: 'sans-serif-condensed',//'Roboto Condensed',
-		fontWeight	: 400,
+		fontFamily	: 'RobotoCondensed-Regular',//'Roboto Condensed',
+		fontWeight	: 700,
 	},
 }
 ".view_row_container": {
@@ -41,9 +41,12 @@
 //	backgroundColor	: "yellow",
 }
 ".view_row_container[platform=android]": {
+	top				: '6dp',//'1.1%',
+	left				: '1.5%',
+	right			: '1.5%',
 	height			: '19%',
 	font: {
-		fontFamily	: 'Share-Bold',
+		fontFamily	: 'Roboto-Black',
 	},
 }
 ".view_num_left": {
@@ -56,10 +59,10 @@
 	backgroundColor	: '#7682ed',//'#f3eba3', // a khaki
 }
 ".view_num_left[platform=android]": {
-	width			: '31%',
+	width			: '32%',
 	height			: Ti.UI.FILL,
 	font: {
-		fontFamily	: 'sans-serif',//'Roboto',
+		fontFamily	: 'Roboto-Black',
 		fontWeight	: 900,
 	},
 }
@@ -73,10 +76,11 @@
 	backgroundColor	: '#7682ed',//'#f3eba3', // a khaki,
 }
 ".view_num[platform=android]": {
-	width			: '31%',
+	left				: '1.5%',
+	width			: '32%',
 	height			: Ti.UI.FILL,,
 	font: {
-		fontFamily	: 'sans-serif',//'Roboto',
+		fontFamily	: 'Roboto-Black',
 		fontWeight	: 900,
 	},
 }
@@ -90,23 +94,24 @@
 	backgroundColor	: '#df1d82',
 }
 ".view_operator[platform=android]": {
-	width			: '31%',
+	left				: '1.5%',
+	width			: '32%',
 	height			: Ti.UI.FILL,,
 	font: {
-		fontFamily	: 'sans-serif',//'Roboto',
+		fontFamily	: 'Roboto-Black',
 		fontWeight	: 900,
 	},
 }
-
+/* "clear" could be 'c' or 'clr' but using 'N' for nullus, nothing */
 "#lbl_clear": {
 	font: {
-		fontFamily	: 'AvenirNext-DemiBold',
+		fontFamily	: 'AvenirNext-Heavy',//'AvenirNext-DemiBold',
 	}
 }
 "#lbl_clear[platform=android]": {
 	font: {
-		fontFamily	: 'sans-serif',//'Roboto',
-		fontWeight	: 400,
+		fontFamily	: 'Roboto-Black',
+		fontWeight	: 900,
 	},
 }
 ".view_operator_dbl": {
@@ -119,7 +124,8 @@
 	backgroundColor	: '#1ddfcb',
 }
 ".view_operator_dbl[platform=android]": {
-	width			: '63%',
+	left				: '1.5%',
+	width			: '65%',
 	height			: Ti.UI.FILL,
 }
 
@@ -129,7 +135,7 @@
 	color			: '#fff',
 	font: {
 		fontSize		: 30,
-		fontFamily	: 'AvenirNext-Heavy',//'Share-Bold',
+		fontFamily	: 'AvenirNext-Heavy',
 	},
 //	backgroundColor	: "#f3eba3", // a khaki
 	verticalAlign	: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
@@ -137,7 +143,7 @@
 }
 "Label[platform=android]": {
 	font: {
-		fontFamily	: 'sans-serif',//'Roboto',
+		fontFamily	: 'Roboto-Black',
 		fontWeight	: 900,
 	},
 }
@@ -151,7 +157,7 @@
 "#lbl_delete[platform=android]": {
 	font: {
 		fontSize		: 44,
-		fontFamily	: 'sans-serif',//'Roboto',
+		fontFamily	: 'Roboto-Black',
 		fontWeight	: 900
 	},
 
@@ -162,9 +168,25 @@
 		fontFamily	: 'AvenirNext-Heavy',
 	},
 }
+"#lbl_plus[platform=android]": {
+	font: {
+		fontSize		: 44,
+		fontFamily	: 'Roboto-Black',
+		fontWeight	: 900
+	},
+
+}
 "#lbl_equals": {
 	font: {
 		fontSize		: 44,
 		fontFamily	: 'AvenirNext-Heavy',
 	},
+}
+"#lbl_equals[platform=android]": {
+	font: {
+		fontSize		: 44,
+		fontFamily	: 'Roboto-Black',
+		fontWeight	: 900
+	},
+
 }
