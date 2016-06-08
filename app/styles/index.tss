@@ -4,7 +4,13 @@
 	layout			: 'vertical',
 	height			: Ti.UI.FILL,
 }
+"#sv_display": {
+	left				: '10dp',
+	right			: '10dp',
+	contentWidth		: Ti.UI.SIZE,
+	contentHeight	: Alloy.Globals.button3Height,
 
+}
 "#display_container": {
 	top				: '20dp',
 	backgroundColor	: '#000',
@@ -32,8 +38,8 @@
 }
 ".view_row_container": {
 	top				: '10dp',
-	left				: '10dp',
-	right			: '10dp',
+	// left				: '10dp',
+	// right			: '10dp',
 	layout			: 'horizontal',
 	horizontalWrap	: false,
 	height			: Alloy.Globals.button3Height,

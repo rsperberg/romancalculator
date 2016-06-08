@@ -1,8 +1,10 @@
 <Alloy>
 	<Window class="container">
-	    <View id='display_container' class="view_row_container">
-	        <Label id='lbl_display'></Label>
-	    </View>
+	    <ScrollView id='sv_display'>
+        	    <View id='display_container' class="view_row_container">
+        	        <Label id='lbl_display'></Label>
+        	    </View>
+	    </ScrollView>
 	    <View id="row_1_container" class="view_row_container">
     	        <View class='view_num_left'>
             		    <Label id="lbl_m">M</Label>

@@ -130,11 +130,11 @@ function accumulate(last1, last0) {
  * call when + is pressed
  */
 function addPress(e) {
-    Ti.API.info('--------------------');
+    Ti.API.info('<--------------------');
     Ti.API.info('just entered addPress; last0_num is: '+last0_num.arabic);
     Ti.API.info('last1_num is: '+last1_num.arabic);
     Ti.API.info('total_num is: '+total_num.arabic);
-    Ti.API.info('--------------------');
+    Ti.API.info('  ----------------');
     // Ti.API.info('just entered addPress; last0_num is: '+JSON.stringify(last0_num));
     // Ti.API.info('last1_num is: '+JSON.stringify(last1_num));
     // keep total in display until a number is pressed
