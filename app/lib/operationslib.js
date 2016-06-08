@@ -24,14 +24,21 @@ exports.add2Numbers = function (prev, last) {
             prev.M += 'M';
         }
     }
-    // then add each numeral
-    total.M = prev.M + last.M;
-    total.D = prev.D + last.D;
-    total.C = prev.C + last.C;
-    total.L = prev.L + last.L;
-    total.X = prev.X + last.X;
-    total.V = prev.V + last.V;
-    total.I = prev.I + last.I;
+    // then add in each numeral
+    total.M += prev.M; 
+    total.M += last.M;
+    total.D += prev.D;
+    total.D += last.D;
+    total.C += prev.C;
+    total.C += last.C;
+    total.L += prev.L;
+    total.L += last.L;
+    total.X += prev.X;
+    total.X += last.X;
+    total.V += prev.V;
+    total.V += last.V;
+    total.I += prev.I;
+    total.I += last.I;
     // add arabic version too
     total.arabic = prev.arabic + last.arabic;
 
