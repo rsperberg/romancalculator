@@ -1,10 +1,12 @@
 <Alloy>
 	<Window class="container">
-	    <ScrollView id='sv_display'>
-        	    <View id='display_container' class="view_row_container">
-        	        <Label id='lbl_display'></Label>
-        	    </View>
-	    </ScrollView>
+    	    <View id='display_container'>
+    	        <Label id='lbl_display' onClick="showHideArabic"></Label>
+    	        <View id='extras_container' layout='horizontal'>
+    	        		<Label id='lbl_mstore'></Label>
+    	        		<Label id='lbl_arabic'></Label>
+    	        </View>
+    	    </View>
 	    <View id="row_1_container" class="view_row_container">
     	        <View class='view_num_left'>
             		    <Label id="lbl_m">M</Label>

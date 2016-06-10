@@ -7,6 +7,7 @@ var current_num = { M: '', D: '', C: '', L: '', X: '', V: '', I: '', CM: '', CD:
 var last0_num   = { M: '', D: '', C: '', L: '', X: '', V: '', I: '', CM: '', CD: '', XC: '', XL: '', IX: '', IV: '', arabic: 0, MStore: '' };
 var last1_num   = { M: '', D: '', C: '', L: '', X: '', V: '', I: '', CM: '', CD: '', XC: '', XL: '', IX: '', IV: '', arabic: 0, MStore: '' };
 var total_num   = { M: '', D: '', C: '', L: '', X: '', V: '', I: '', CM: '', CD: '', XC: '', XL: '', IX: '', IV: '', arabic: 0, MStore: '' };
+var blank_num   = { M: '', D: '', C: '', L: '', X: '', V: '', I: '', CM: '', CD: '', XC: '', XL: '', IX: '', IV: '', arabic: 0, MStore: '' };
 var totalDisplayed = false;
 var key_state = {
     M : { active: true, opacity: 1.0, id: '$.lbl_m' },
@@ -39,6 +40,7 @@ function lastPressed(char_entered) {
     accumulate(last1_char, last0_char);
 }
 function numPress(e) {
+	Ti.API.info('entered numPress, e.source.text: '+e.source.text + 'totalDisplayed is: '+totalDisplayed);
     // using + as a 'total' key means we have to clear the display when we start a new number
     if (totalDisplayed == true) {
         clearDisplay();
@@ -50,8 +52,9 @@ function numPress(e) {
     $.lbl_display.text += e.source.text;
     // send last character entered to function keeping track
     lastPressed(e.source.text);
+    $.lbl_arabic.text = (current_num.arabic).toString();
 //    Ti.API.info('$.lbl_display.text: '+$.lbl_display.text);
-    Ti.API.info('in numPress, e.source.text: '+e.source.text);
+//    Ti.API.info('in numPress, e.source.text: '+e.source.text);
 }
 function accumulate(last1, last0) {
     switch (last0) {
@@ -131,53 +134,70 @@ function accumulate(last1, last0) {
  */
 function addPress(e) {
     Ti.API.info('<--------------------');
-    Ti.API.info('just entered addPress; last0_num is: '+last0_num.arabic);
+    Ti.API.info('+ just pressed; last0_num is: '+last0_num.arabic);
     Ti.API.info('last1_num is: '+last1_num.arabic);
     Ti.API.info('total_num is: '+total_num.arabic);
-    Ti.API.info('  ----------------');
+    Ti.API.info('  ---------------->');
     // Ti.API.info('just entered addPress; last0_num is: '+JSON.stringify(last0_num));
     // Ti.API.info('last1_num is: '+JSON.stringify(last1_num));
     // keep total in display until a number is pressed
     totalDisplayed = true;
     // put numbers into accumulators
     // if we haven't done any adding yet, last1_num is not yet changed
-    if (last1_num.arabic == 0 && total_num.arabic == 0) {
-        last1_num = last0_num;
+    if (last0_num.arabic == 0) {
+        Ti.API.info('no need to change last1_num');
+    } else if (last1_num.arabic == 0 && total_num.arabic == 0) {
+//        last1_num = last0_num;
+		last1_num = lib.transferAccum(last0_num,last1_num);
     } else {
         // if we've started summing, then use last1_num to hold the everything up to now
-        last1_num = total_num;
+//        last1_num = total_num;
+		last1_num = lib.resetAccum(last1_num);
+		last1_num = lib.transferAccum(total_num,last1_num);
     }
-//    last1_num = total_num;
     // put the number just entered into last0_num
-    last0_num = current_num;
-    Ti.API.info('after testing, last0_num is: '+last0_num.arabic);
-    Ti.API.info('last1_num is: '+last1_num.arabic);
+//    last0_num = current_num;
+	last0_num = lib.resetAccum(last0_num);
+	last0_num = lib.transferAccum(current_num,last0_num);
+    // Ti.API.info('after testing, last0_num is: '+last0_num.arabic);
+    // Ti.API.info('last1_num is: '+last1_num.arabic);
+    // Ti.API.info('total_num is: '+total_num.arabic);
     // Ti.API.info('last0_num is: '+JSON.stringify(last0_num));
     // Ti.API.info('last1_num is: '+JSON.stringify(last1_num));
+    
     total_num = lib.add2Numbers(last1_num, current_num);
-    Ti.API.info('after addition, total_num is: '+total_num.arabic);
-    Ti.API.info('-- total_num is: '+JSON.stringify(total_num));
-    Ti.API.info('before calling resetCurrentNum, it is: '+current_num.arabic);
+    // Ti.API.info('after addition, total_num is: '+total_num.arabic);
+    // Ti.API.info('-- total_num is: '+JSON.stringify(total_num));
+    // Ti.API.info('before calling resetCurrentNum, it is: '+current_num.arabic);
     resetCurrentNum();
-    Ti.API.info('after calling resetCurrentNum, it is: '+current_num.arabic);
+    // Ti.API.info('after calling resetCurrentNum, it is: '+current_num.arabic);
     $.lbl_display.text = lib.makeDisplayStringFromArray(total_num);
-    Ti.API.info('just changed display to show total, now done with addPress');
+    // Ti.API.info('just changed display to show total, now done with addPress');
     // remove number from display // will put total on screen, not clear display till number pressed
     //clearDisplay();
+    $.lbl_mstore.text = lib.yieldMStoreFromArray(total_num);
+    $.lbl_arabic.text = (total_num.arabic).toString();
 }
 
 /*
  * Call this when N (aka 'clear') is pressed and when operators are pressed
  */
 function clearDisplay() {
+	Ti.API.info('called clearDisplay');
     // set the display to empty string
     $.lbl_display.text = '';
+    $.lbl_mstore.text = '';
+    $.lbl_arabic.text = '';//(0).toString(); //(current_num.arabic).toString();
     // reset the characters pressed variables to empty string
     last0_char = '',
     last1_char = '',
     last2_char = '',
     last_3_chars = '';
     dimChars(null);
+}
+function showHideArabic() {
+	($.lbl_arabic.visible) ? $.lbl_arabic.visible = false : $.lbl_arabic.visible = true;
+	Ti.API.info('arabic numbers display is set to: '+$.lbl_arabic.visible);
 }
 function resetCurrentNum() {
     Ti.API.info('--- entered resetCurrentNum');
@@ -197,36 +217,38 @@ function resetCurrentNum() {
     current_num.I = '';
     current_num.MStore = '';
     current_num.arabic = 0;
-    Ti.API.info('--- after resetCurrentNum, current_num is: '+current_num.arabic);
-    // Ti.API.info('after resetCurrentNum, current_num is: '+JSON.stringify(current_num));
+//    Ti.API.info('--- after resetCurrentNum, current_num is: '+current_num.arabic);
+    Ti.API.info('after resetCurrentNum, current_num is: '+JSON.stringify(current_num));
     dimChars(null);
 }
 /*
  * Use this function to clear the display and all values: start over
  */
 function resetAccumulators() {
+	Ti.API.info('entered resetAccumulators');
     // set every value to empty string in current_num
     resetCurrentNum();
     // set each other accumulator to equal the empty current_num
-    last0_num = current_num;
-    last1_num = current_num;
-    total_num = current_num;
+    last0_num = lib.resetAccum(last0_num);
+    last0_num = lib.resetAccum(last1_num);
+    last0_num = lib.resetAccum(total_num);
     Ti.API.info('after reset, last0_num is: '+last0_num.arabic);
     Ti.API.info('after reset, last1_num is: '+last1_num.arabic);
     Ti.API.info('after reset, total_num is: '+total_num.arabic);
-    // Ti.API.info('after reset, last0_num is: '+JSON.stringify(last0_num));
-    // Ti.API.info('after reset, last1_num is: '+JSON.stringify(last1_num));
-    // Ti.API.info('after reset, total_num is: '+JSON.stringify(total_num));
+    Ti.API.info('after reset, last0_num is: '+JSON.stringify(last0_num));
+    Ti.API.info('after reset, last1_num is: '+JSON.stringify(last1_num));
+    Ti.API.info('after reset, total_num is: '+JSON.stringify(total_num));
 }
 function clearAll() {
     clearDisplay();
     resetAccumulators();
 }
 function deleteLeft() {
+    Ti.API.info('entering deleteLeft, current_num is: '+JSON.stringify(current_num));
     // use slice method to remove last character of display
     var displayText =  $.lbl_display.text;
     var charCount = displayText.length;
-    (charCount > 0) ? $.lbl_display.text = displayText.slice(0, -1) : '';
+    $.lbl_display.text = (charCount > 0) ? displayText.slice(0, -1) : '';
     // reset the characters pressed variables to earlier characters
     // this allows backspace to be pressed several times without throwing off logic
     last0_char = (charCount > 1) ? displayText.charAt(charCount-2) : '';
@@ -234,6 +256,12 @@ function deleteLeft() {
     last2_char = (charCount > 3) ? displayText.charAt(charCount-4) : '';
     last_3_chars = last2_char + last1_char + last0_char;
     dimChars(last2_char, last1_char, last0_char);
+    // with display changed, we need to change the accumulated values in current_num
+    // yes, we run the whole thing again each time deleteLeft is called; this is simpler than subtracting what was just added when the key was pressed before backspacing
+	displayText = $.lbl_display.text;
+    current_num = lib.parseDisplayNum(displayText);
+    $.lbl_arabic.text = (current_num.arabic).toString();
+    Ti.API.info('after deleteLeft, current_num is: '+JSON.stringify(current_num));
     updateScreen();
 }
 
@@ -244,6 +272,9 @@ function dimChars(last2, last1, last0) {
         roman_array.forEach(setActive);
         updateScreen();
     } else {
+    		// each case and sub-case identifies which keys should be set to touchable='true' and opacity=1.0
+    		// once those are set, the keys on the screen are updated
+    		// this prevents illegal values from being entered
         switch (last0) {
             case 'M':
 //                Ti.API.info('in switch, last0_char is M');
@@ -292,8 +323,8 @@ function dimChars(last2, last1, last0) {
                     updateScreen();
                     break;
                 } else if (last1 == 'X') {
-                    ['M','D','C','L'].forEach(setInactive);
-                    ['X','V','I'].forEach(setActive);
+                    ['M','D','C','L','X'].forEach(setInactive);
+                    ['V','I'].forEach(setActive);
                     updateScreen();
                     break;
                 } else {
@@ -400,6 +431,7 @@ function setInactive(element, index, array) {
     key_state[idx].opacity = 0.3;
 }
 function updateScreen() {
+	// make each key touchable and its numeral visible based on what's stored in key_state 
     $.lbl_m.opacity = key_state["M"].opacity;
     $.lbl_m.touchEnabled = key_state["M"].active;
     $.lbl_d.opacity = key_state["D"].opacity;
@@ -415,6 +447,7 @@ function updateScreen() {
     $.lbl_i.opacity = key_state["I"].opacity;
     $.lbl_i.touchEnabled = key_state["I"].active;
 }
+// put an event listener on each key
 $.lbl_m.addEventListener('click', numPress);
 $.lbl_d.addEventListener('click', numPress);
 $.lbl_c.addEventListener('click', numPress);
@@ -423,7 +456,9 @@ $.lbl_x.addEventListener('click', numPress);
 $.lbl_v.addEventListener('click', numPress);
 $.lbl_i.addEventListener('click', numPress);
 $.lbl_clear.addEventListener('click', clearAll);
+//$.lbl_display.addEventListener('click', showHideArabic);
 $.lbl_delete.addEventListener('click', deleteLeft);
 $.lbl_plus.addEventListener('click', addPress);
 $.lbl_equals.addEventListener('click', addPress);
+// launch the app by opening the main (only) window
 $.index.open();

@@ -4,22 +4,35 @@
 	layout			: 'vertical',
 	height			: Ti.UI.FILL,
 }
+/*
 "#sv_display": {
+	top				: '20dp',
 	left				: '10dp',
 	right			: '10dp',
+	height			: Alloy.Globals.button3Height,
 	contentWidth		: Ti.UI.SIZE,
 	contentHeight	: Alloy.Globals.button3Height,
-
+	scrollType		: 'horizontal',
+	backgroundColor	: '#000',
+	layout			: "horizontal",
 }
+*/
 "#display_container": {
 	top				: '20dp',
+	left				: '10dp',
+	right			: '10dp',
 	backgroundColor	: '#000',
+	height			: '19%',//Titanium.UI.SIZE,
+	layout			: 'vertical',
 }
 "#display_container[platform=android]": {
 	top				: '4dp',
 }
 "#lbl_display": {
-	width			: Ti.UI.FILL,
+	center: {
+		y			: '40%',
+	},
+	width			: Ti.UI.SIZE,
 	right			: '2dp',
 	backgroundColor	: 'transparent',
 	color			: '#fff',
@@ -28,6 +41,10 @@
 		fontFamily	: 'AvenirNextCondensed-DemiBold',//'AvenirNextCondensed-Bold',
 	},
 	textAlign		: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+	height			: '80%',//Alloy.Globals.button3Height,
+	zIndex			: 10,
+	// horizontalWrap	: false,
+	// ellipsize 		: false,
 }
 "#lbl_display[platform=android]": {
 	font: {
@@ -36,10 +53,56 @@
 		fontWeight	: 700,
 	},
 }
+"#extras_container": {
+	backgroundColor : 'transparent',
+	bottom			: 20,
+	textAlign		: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+}
+'#lbl_mstore': {
+	text				: '',
+	left				: '2dp',
+	bottom			: '6dp',
+	color			: '#fff',
+	font: {
+		fontSize		: 20,
+		fontFamily	: 'AvenirNextCondensed-DemiBold',//'AvenirNextCondensed-Bold',
+	},
+	textAlign		: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	backgroundColor	: 'transparent',	
+	width			: '80%',
+}
+'#lbl_mstore[platform=android]': {
+	font: {
+		fontSize		: 20,
+		fontFamily	: 'RobotoCondensed-Regular',//'Roboto Condensed',
+		fontWeight	: 700,
+	},
+}
+'#lbl_arabic': {
+	visible			: true,
+	text				: '',
+	right			: '2dp',
+	bottom			: '6dp',
+	color			: '#df1d82',
+	font: {
+		fontSize		: 20,
+		fontFamily	: 'AvenirNextCondensed-Regular',//'AvenirNextCondensed-Bold',
+	},
+	textAlign		: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+	backgroundColor	: 'transparent',	
+	width			: '19%',
+}
+'#lbl_arabic[platform=android]': {
+	font: {
+		fontSize		: 20,
+		fontFamily	: 'RobotoCondensed-Regular',//'Roboto Condensed',
+		fontWeight	: 400,
+	},
+}
 ".view_row_container": {
 	top				: '10dp',
-	// left				: '10dp',
-	// right			: '10dp',
+	left				: '10dp',
+	right			: '10dp',
 	layout			: 'horizontal',
 	horizontalWrap	: false,
 	height			: Alloy.Globals.button3Height,
