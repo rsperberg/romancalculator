@@ -22,7 +22,7 @@
 	left				: '10dp',
 	right			: '10dp',
 	backgroundColor	: '#000',
-	height			: '19%',//Titanium.UI.SIZE,
+	height			: '17.5%',
 	layout			: 'vertical',
 }
 "#display_container[platform=android]": {
@@ -30,7 +30,7 @@
 }
 "#lbl_display": {
 	center: {
-		y			: '40%',
+		y			: '33%',
 	},
 	width			: Ti.UI.SIZE,
 	right			: '2dp',
@@ -38,10 +38,10 @@
 	color			: '#fff',
 	font: {
 		fontSize		: 44,
-		fontFamily	: 'AvenirNextCondensed-DemiBold',//'AvenirNextCondensed-Bold',
+		fontFamily	: 'AvenirNextCondensed-DemiBold',
 	},
 	textAlign		: Ti.UI.TEXT_ALIGNMENT_RIGHT,
-	height			: '80%',//Alloy.Globals.button3Height,
+	height			: '70%',//Alloy.Globals.button3Height,
 	zIndex			: 10,
 	// horizontalWrap	: false,
 	// ellipsize 		: false,
@@ -49,14 +49,21 @@
 "#lbl_display[platform=android]": {
 	font: {
 		fontSize		: 38,
-		fontFamily	: 'RobotoCondensed-Regular',//'Roboto Condensed',
+		fontFamily	: 'RobotoCondensed-Regular',
 		fontWeight	: 700,
 	},
+	height			: '65%',//Alloy.Globals.button3Height,
 }
 "#extras_container": {
 	backgroundColor : 'transparent',
 	bottom			: 20,
+	height			: '29%',
 	textAlign		: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+	layout			: 'horizontal',
+}
+"#extras_container[platform=android]": {
+	backgroundColor : 'transparent',
+	height			: '34%',
 }
 '#lbl_mstore': {
 	text				: '',
@@ -65,11 +72,11 @@
 	color			: '#fff',
 	font: {
 		fontSize		: 20,
-		fontFamily	: 'AvenirNextCondensed-DemiBold',//'AvenirNextCondensed-Bold',
+		fontFamily	: 'AvenirNextCondensed-DemiBold',
 	},
 	textAlign		: Ti.UI.TEXT_ALIGNMENT_LEFT,
 	backgroundColor	: 'transparent',	
-	width			: '80%',
+	width			: '70%',
 }
 '#lbl_mstore[platform=android]': {
 	font: {
@@ -90,7 +97,8 @@
 	},
 	textAlign		: Ti.UI.TEXT_ALIGNMENT_RIGHT,
 	backgroundColor	: 'transparent',	
-	width			: '19%',
+	width			: '28%',
+	zIndex			: 11,
 }
 '#lbl_arabic[platform=android]': {
 	font: {
@@ -107,7 +115,6 @@
 	horizontalWrap	: false,
 	height			: Alloy.Globals.button3Height,
 	width			: Ti.UI.FILL,
-//	backgroundColor	: "yellow",
 }
 ".view_row_container[platform=android]": {
 	top				: '6dp',//'1.1%',
@@ -125,7 +132,7 @@
 //	right			: '5dp',
 	width			: Alloy.Globals.button3Width,
 	height			: Alloy.Globals.button3Height,
-	backgroundColor	: '#7682ed',//'#f3eba3', // a khaki
+	backgroundColor	: '#7682ed',
 }
 ".view_num_left[platform=android]": {
 	width			: '32%',
@@ -142,7 +149,7 @@
 //	right			: '5dp',
 	width			: Alloy.Globals.button3Width,
 	height			: Alloy.Globals.button3Height,
-	backgroundColor	: '#7682ed',//'#f3eba3', // a khaki,
+	backgroundColor	: '#7682ed',
 }
 ".view_num[platform=android]": {
 	left				: '1.5%',
@@ -206,7 +213,6 @@
 		fontSize		: 30,
 		fontFamily	: 'AvenirNext-Heavy',
 	},
-//	backgroundColor	: "#f3eba3", // a khaki
 	verticalAlign	: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
 	textAlign		: Ti.UI.TEXT_ALIGNMENT_CENTER,
 }
