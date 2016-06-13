@@ -1,8 +1,8 @@
-#appname: romancalc
-#publisher: rsperberg
-#url: http://super-script.us
-#image: appicon.png
-#appid: us.superscript.romancalc
-#desc: undefined
-#type: mobile
-#guid: b478f6ce-1b03-4ef6-9eee-7b36401d4dcb
+#appname:romancalc
+#publisher:Roger Sperberg
+#url:http://super-script.us
+#image:appicon.png
+#appid:us.superscript.romancalculator
+#desc:A calculator that adds Roman numerals, with optional display of Arabic numbers
+#type:mobile
+#guid:b478f6ce-1b03-4ef6-9eee-7b36401d4dcb
