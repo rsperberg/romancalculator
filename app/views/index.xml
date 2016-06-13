@@ -1,7 +1,7 @@
 <Alloy>
 	<Window class="container">
-    	    <View id='display_container'>
-    	        <Label id='lbl_display' onClick="showHideArabic"></Label>
+    	    <View id='display_container' onClick="showHideArabic">
+    	        <Label id='lbl_display'></Label>
     	        <View id='extras_container' layout='horizontal'>
     	        		<Label id='lbl_mstore'></Label>
     	        		<Label id='lbl_arabic'></Label>
