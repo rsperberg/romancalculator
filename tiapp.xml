@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <id>us.superscript.romancalc</id>
-    <name>romancalc</name>
+    <id>us.superscript.romancalculator</id>
+    <name>Roman Numeral Calculator</name>
     <version>1.0</version>
-    <publisher>rsperberg</publisher>
+    <publisher>Roger Sperberg</publisher>
     <url>http://super-script.us</url>
-    <description>undefined</description>
-    <copyright>2016 by rsperberg</copyright>
+    <description>A calculator that adds Roman numerals, with optional display of Arabic numbers</description>
+    <copyright>2016 by Roger Sperberg</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
